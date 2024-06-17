@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/16 18:19:48 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/16 18:49:06 by mpitot           ###   ########.fr       */
+/*   Created: 2024/06/17 14:31:35 by mpitot            #+#    #+#             */
+/*   Updated: 2024/06/17 14:45:19 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "PhoneBook.hpp"
 
-char	get_char(char c)
+PhoneBook::PhoneBook()
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (c);
+	first = -1;
+	full = false;
 }
 
-int	main(int ac, char **av)
+
+int	PhoneBook::addContact(std::string &fName, std::string &lName, std::string &nName, std::string &phone, std::string &secret)
 {
-	if (ac < 2)
-	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (0);
-	}
+	if (fName.empty() || lName.empty() || nName.empty() || phone.empty() || secret.empty())
+		std::cerr << "No fields can be left emptpy." << std::endl;
 
-	size_t	j;
-	size_t	i = 0;
 
-	while (av[++i])
-	{
-		j = -1;
-		while (av[i][++j])
-			std::cout << get_char(av[i][j]);
-	}
-	std::cout << std::endl;
 	return (0);
 }
