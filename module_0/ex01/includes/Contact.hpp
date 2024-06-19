@@ -6,14 +6,13 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 19:21:04 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/17 14:50:00 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/17 15:19:59 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <iostream>
-
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
+# include <iostream>
 
 class Contact
 {

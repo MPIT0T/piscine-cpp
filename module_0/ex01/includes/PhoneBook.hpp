@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 10:12:14 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/17 14:45:19 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/18 11:46:59 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ class PhoneBook
 {
 private:
 	Contact	contacts[8];
-	int		first;
-	bool	full;
+	int		index;
+	int		amount;
 
 public:
 	PhoneBook();
 
-	int	addContact(std::string &fName, std::string &lName, std::string &nName, std::string &phone, std::string &secret);
+	int			addContact(Contact contact);
+	int			getContactAmount();
+	Contact		*getContact(int i);
 };

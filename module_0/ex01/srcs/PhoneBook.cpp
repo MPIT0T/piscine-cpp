@@ -6,24 +6,36 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:31:35 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/17 14:45:19 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/19 13:34:04 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
+#include <utility>
+
 PhoneBook::PhoneBook()
 {
-	first = -1;
-	full = false;
+	index = 0;
+	amount = 0;
 }
 
 
-int	PhoneBook::addContact(std::string &fName, std::string &lName, std::string &nName, std::string &phone, std::string &secret)
+int		PhoneBook::addContact(Contact contact)
 {
-	if (fName.empty() || lName.empty() || nName.empty() || phone.empty() || secret.empty())
-		std::cerr << "No fields can be left emptpy." << std::endl;
-
-
+	contacts[index] = contact;
+	index = (index + 1) % 8;
+	if (amount < 8)
+		amount++;
 	return (0);
+}
+
+int		PhoneBook::getContactAmount()
+{
+	return (amount);
+}
+
+Contact	*PhoneBook::getContact(int i)
+{
+	return (&contacts[i]);
 }
