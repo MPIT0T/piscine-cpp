@@ -6,11 +6,11 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 18:10:04 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/19 15:29:08 by mpitot           ###   ########.fr        #
+#    Updated: 2024/06/19 21:04:17 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	main.cpp
+SRCS	=	tests.cpp
 
 OBJS	=	$(SRCS:%.cpp=${OBJ_D}%.o)
 
@@ -20,7 +20,7 @@ OBJ_D	=	.objs/
 
 HEAD	=	includes/
 
-NAME	=
+NAME	=	job
 
 CC		=	c++
 
@@ -78,7 +78,7 @@ endef
 
 all		:	${NAME}
 
-${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.cpp Makefile includes/Contact.hpp includes/PhoneBook.hpp
+${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.cpp Makefile includes/Account.hpp
 	@$(call print_progress,$<)
 	@${CC} ${FLAGS} -I${HEAD} -c $< -o $@
 	@$(call update_progress,$<)
