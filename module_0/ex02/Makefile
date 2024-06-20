@@ -5,12 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/16 18:10:04 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/19 21:04:17 by mpitot           ###   ########.fr        #
+#    Created: 2024/06/19 22:35:31 by mpitot            #+#    #+#              #
+#    Updated: 2024/06/19 22:39:09 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	tests.cpp
+SRCS	=	tests.cpp	\
+			Account.cpp
 
 OBJS	=	$(SRCS:%.cpp=${OBJ_D}%.o)
 
