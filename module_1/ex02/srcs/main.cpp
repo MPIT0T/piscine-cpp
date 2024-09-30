@@ -12,11 +12,6 @@
 
 #include <iostream>
 
-void	print_content(std::string str, std::string *stringPTR, std::string &stringREF)
-{
-
-}
-
 int	main()
 {
 	std::string	str = "HI THIS IS BRAIN";

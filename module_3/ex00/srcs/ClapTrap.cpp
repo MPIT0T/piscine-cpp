@@ -17,7 +17,7 @@
 const std::string		ClapTrap::CLAPTRAP_BASE_NAME = "Steve";
 const unsigned int		ClapTrap::CLAPTRAP_BASE_HITPOINTS = 10;
 const unsigned int		ClapTrap::CLAPTRAP_BASE_ENERGY_POINTS = 10;
-const unsigned int		ClapTrap::CLAPTRAP_BASE_ATTACK_DAMAGE = 1;
+const unsigned int		ClapTrap::CLAPTRAP_BASE_ATTACK_DAMAGE = 0;
 
 /* Constructors ************************************************************* */
 ClapTrap::ClapTrap() :

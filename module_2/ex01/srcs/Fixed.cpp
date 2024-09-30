@@ -51,26 +51,20 @@ Fixed &Fixed::operator=(const Fixed &src)
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this == &src)
 		return (*this);
-	_value = src.getRawBits();
+	this->_value = src.getRawBits();
 	return (*this);
-}
-
-std::ostream	&operator<<(std::ostream &os, const Fixed &src)
-{
-	os << src.toFloat();
-	return (os);
 }
 
 //////////////////////////////////////////////////////
 
 int Fixed::getRawBits(void) const
 {
-	return (_value);
+	return (this->_value);
 }
 
 void Fixed::setRawBits(const int raw)
 {
-	_value = raw;
+	this->_value = raw;
 }
 
 //////////////////////////////////////////////////////
@@ -83,4 +77,11 @@ float Fixed::toFloat(void) const
 int	Fixed::toInt(void) const
 {
 	return (this->getRawBits() >> _fractional_bits);
+}
+/////////////////////////////////////////////////////
+
+std::ostream	&operator<<(std::ostream &os, const Fixed &src)
+{
+	os << src.toFloat();
+	return (os);
 }

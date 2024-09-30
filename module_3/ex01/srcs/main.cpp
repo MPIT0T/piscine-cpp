@@ -16,14 +16,36 @@
 
 int main(void)
 {
-	ClapTrap parent;
-	ScavTrap child("Hola");
-	ScavTrap child2(child);
+	ClapTrap	parent("Joel");
+	ScavTrap	child("Ellie");
 
-	// child.attack("Walter");
-	// parent.takeDamage(child.SCAVTRAP_BASE_ATTACK_DAMAGE);
-	// parent.beRepaired(10);
-	// parent.attack("child2");
-	// child2.beRepaired(3);
+	std::cout << std::endl;
+
+
+	parent.attack("Ellie");
+	child.attack("Joel");
+
+	std::cout << std::endl;
+
+	parent.takeDamage(1);
+	child.takeDamage(1);
+
+	std::cout << std::endl;
+
+	parent.beRepaired(10);
+	child.beRepaired(10);
+
+	std::cout << std::endl;
+
+	child.guardGate();
+	// parent.guardGate();
+
+	std::cout << std::endl;
+
+	parent.takeDamage(9);
+	child.takeDamage(100);
+
+	std::cout << std::endl;
+
 	return (0);
 }

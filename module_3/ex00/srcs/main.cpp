@@ -17,13 +17,24 @@ int main(void)
 	ClapTrap steve("Steve");
 	ClapTrap eve("Eve");
 
+	std::cout << std::endl;
+
 	steve.attack("Eve");
-	steve.takeDamage(2);
-	steve.beRepaired(1);
+	eve.takeDamage(1);
+	eve.beRepaired(1);
+
+	std::cout << std::endl;
 
 	eve.attack("Steve");
-	eve.takeDamage(2);
-	eve.beRepaired(1);
+	steve.takeDamage(1);
+	steve.beRepaired(2);
+
+	std::cout << std::endl;
+
+	steve.takeDamage(10);
+	eve.takeDamage(10);
+
+	std::cout << std::endl;
 
 	return (0);
 }
