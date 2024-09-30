@@ -21,7 +21,6 @@ int main(void)
 
 	std::cout << std::endl;
 
-
 	parent.attack("Ellie");
 	child.attack("Joel");
 
@@ -37,8 +36,8 @@ int main(void)
 
 	std::cout << std::endl;
 
-	child.guardGate();
 	// parent.guardGate();
+	child.guardGate();
 
 	std::cout << std::endl;
 
