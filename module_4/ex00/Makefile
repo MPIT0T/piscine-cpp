@@ -6,11 +6,22 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 18:10:04 by mpitot            #+#    #+#              #
-#    Updated: 2024/09/23 12:42:35 by mpitot           ###   ########.fr        #
+#    Updated: 2024/09/30 21:24:57 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	main.cpp
+SRCS	=	main.cpp		\
+			Animal.cpp		\
+			Dog.cpp			\
+			Cat.cpp			\
+			WrongAnimal.cpp	\
+			WrongCat.cpp
+
+HEADERS	=	Animal.hpp		\
+			Dog.hpp			\
+			Cat.hpp			\
+			WrongAnimal.hpp	\
+			WrongCat.hpp
 
 OBJS	=	$(SRCS:%.cpp=${OBJ_D}%.o)
 
@@ -18,7 +29,9 @@ SRC_D	=	srcs/
 
 OBJ_D	=	.objs/
 
-HEAD	=	includes/
+HEAD_D	=	includes/
+
+HEAD	=	$(addprefix $(HEAD_D), $(HEADERS))
 
 NAME	=	poly
 
@@ -76,14 +89,14 @@ endef
 
 all		:	${NAME}
 
-${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.cpp Makefile 
+${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.cpp Makefile $(HEAD)
 	@$(call print_progress,$<)
-	@${CC} ${FLAGS} -I${HEAD} -c $< -o $@
+	@${CC} ${FLAGS} -I${HEAD_D} -c $< -o $@
 	@$(call update_progress,$<)
 
 ${NAME}	:	${OBJ_D} ${OBJS}
 	@$(call print_progress,$(NAME))
-	@${CC} ${FLAGS} -I${HEAD} ${OBJS} -o ${NAME}
+	@${CC} ${FLAGS} -I${HEAD_D} ${OBJS} -o ${NAME}
 	@$(eval CHANGED=1)
 	@$(call erase)
 	@$(call done_and_dusted,$(NAME))

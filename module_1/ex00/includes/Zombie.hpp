@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 10:02:48 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/21 10:08:02 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/09/30 10:50:35 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ private:
 
 public:
 	Zombie(std::string name);
-	~Zombie(void);
+
 	void	announce(void);
+
+	~Zombie(void);
 };
 
 #endif
