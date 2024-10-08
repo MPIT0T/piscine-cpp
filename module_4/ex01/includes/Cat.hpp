@@ -1,44 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 21:25:37 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/07 11:03:10 by mpitot           ###   ########.fr       */
+/*   Created: 2024/09/30 21:31:46 by mpitot            #+#    #+#             */
+/*   Updated: 2024/10/07 11:01:33 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
-# include <string>
+# include "Animal.hpp"
+# include "Brain.hpp"
 
-class	Animal
+class Cat : public Animal
 {
-protected:
-	std::string	_type;
+private:
+	Brain	*_brain;
 
 public:
 /* Constructors */
-	Animal();
-	Animal(Animal const &src);
+	Cat();
+	Cat(Cat const &src);
 
 /* Operators */
-	Animal	&operator=(Animal const &src);
+	Cat	&operator=(Cat const &src);
 
 /* Destructors */
-	virtual ~Animal();
+	~Cat();
 
 /* Actions */
-	virtual void	makeSound() const;
+	void makeSound() const;
 
-/* Getters */
-	std::string		getType() const;
-
-/* Setters */
-    void			setType(std::string type);
 };
 
 #endif

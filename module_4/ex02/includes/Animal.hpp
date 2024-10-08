@@ -32,7 +32,7 @@ public:
 	virtual ~Animal();
 
 /* Actions */
-	virtual void	makeSound() const;
+	virtual void	makeSound() const = 0;
 
 /* Getters */
 	std::string		getType() const;

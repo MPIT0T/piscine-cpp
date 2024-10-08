@@ -1,54 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 21:28:37 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/07 10:57:56 by mpitot           ###   ########.fr       */
+/*   Created: 2024/09/30 21:28:29 by mpitot            #+#    #+#             */
+/*   Updated: 2024/10/08 12:57:19 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "Cat.hpp"
 #include <iostream>
 
 /* Constructors ************************************************************* */
-
-Dog::Dog()
+Cat::Cat()
 {
-	this->_type = "Dog";
-	std::cout << "Dog default constructor called" << std::endl;
+	std::cout << "Cat default constructor called" << std::endl;
+	this->_type = "Cat";
+	this->_brain = new Brain();
 }
 
-Dog::Dog(Dog const& src) : Animal(src)
+Cat::Cat(Cat const& src) : Animal(src)
 {
-	*this = src;
-	std::cout << "Dog copy constructor called" << std::endl;
+	std::cout << "Cat copy constructor called" << std::endl;
+	this->_brain = new Brain(*src._brain);
+	this->_type = src._type;
 }
 
 /* Destructor *************************************************************** */
-
-Dog::~Dog()
+Cat::~Cat()
 {
-	std::cout << "Dog destructor called" << std::endl;
+	std::cout << "Cat destructor called" << std::endl;
+	delete this->_brain;
 }
 
 /* Operators **************************************************************** */
-
-Dog&	Dog::operator=(Dog const& src)
+Cat&	Cat::operator=(Cat const& src)
 {
+	std::cout << "Cat assignation operator called" << std::endl;
 	if (this != &src)
 	{
+		delete this->_brain;
+		this->_brain = new Brain(*src._brain);
 		this->_type = src._type;
 	}
-	std::cout << "Dog assignation operator called" << std::endl;
 	return (*this);
 }
 
 /* Actions ****************************************************************** */
-
-void	Dog::makeSound() const
+void	Cat::makeSound() const
 {
-	std::cout << "\"Wouf Wouf\"" << std::endl;
+	std::cout << "\"Miaouu\"" << std::endl;
 }

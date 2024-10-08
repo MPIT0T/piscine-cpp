@@ -1,44 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 21:25:37 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/07 11:03:10 by mpitot           ###   ########.fr       */
+/*   Created: 2024/09/30 21:35:18 by mpitot            #+#    #+#             */
+/*   Updated: 2024/10/07 16:44:33 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 
-# include <string>
+# include "Animal.hpp"
+# include "Brain.hpp"
 
-class	Animal
+class Dog : public Animal
 {
-protected:
-	std::string	_type;
+private:
+	Brain	*_brain;
 
 public:
 /* Constructors */
-	Animal();
-	Animal(Animal const &src);
-
-/* Operators */
-	Animal	&operator=(Animal const &src);
+	Dog();
+	Dog(Dog const &src);
 
 /* Destructors */
-	virtual ~Animal();
+	~Dog();
+
+/* Operators */
+	Dog	&operator=(Dog const &src);
 
 /* Actions */
-	virtual void	makeSound() const;
+	void makeSound() const;
 
-/* Getters */
-	std::string		getType() const;
-
-/* Setters */
-    void			setType(std::string type);
 };
 
 #endif

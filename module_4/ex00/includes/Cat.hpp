@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:31:46 by mpitot            #+#    #+#             */
-/*   Updated: 2024/09/30 21:39:52 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/10/07 11:01:33 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 
 class Cat : public Animal
 {
-private:
-
 public:
 /* Constructors */
 	Cat();
@@ -29,6 +27,10 @@ public:
 
 /* Destructors */
 	~Cat();
+
+/* Actions */
+	void makeSound() const;
+
 };
 
 #endif
