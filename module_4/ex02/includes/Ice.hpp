@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   Ice.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 16:24:58 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/07 16:40:12 by mpitot           ###   ########.fr       */
+/*   Created: 2024/10/14 09:23:21 by mpitot            #+#    #+#             */
+/*   Updated: 2024/10/14 09:23:21 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-# define BRAIN_HPP
+#ifndef ICE_HPP
+# define ICE_HPP
 
-#include <string>
+# include "AMateria.hpp"
+# include <string>
 
-class Brain
+class Ice : public AMateria
 {
-private:
-	std::string _ideas[100];
-
 public:
-/* Constructors and destructors */
-	Brain();
-	Brain(const Brain &copy);
-	~Brain();
+/* Constructors */
+	Ice();
+	Ice(std::string const &type);
+	Ice(Ice const &src);
 
-/* Operator overloads */
-	Brain	&operator=(const Brain &src);
+	~Ice();
 
-/* Member functions */
-	void	addIdea(const std::string& idea);
-	void	setIdea(int index, const std::string& idea);
-	void	displayIdeas() const;
+/* Operators */
+	Ice			&operator=(Ice const &src);
+
+/* Methods */
+	AMateria	*clone() const;
+	void		use(ICharacter &target);
 };
+
 
 #endif

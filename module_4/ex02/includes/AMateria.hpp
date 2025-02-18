@@ -1,44 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AMateria.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 21:25:37 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/07 11:03:10 by mpitot           ###   ########.fr       */
+/*   Created: 2024/10/13 22:44:03 by mpitot            #+#    #+#             */
+/*   Updated: 2024/10/13 23:04:45 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef AMATERIA_HPP
+# define AMATERIA_HPP
 
 # include <string>
 
-class	Animal
+class AMateria
 {
 protected:
-	std::string	_type;
+	std::string _type;
 
 public:
 /* Constructors */
-	Animal();
-	Animal(Animal const &src);
+	AMateria();
+	explicit AMateria(std::string const &type);
+	AMateria(AMateria const &src);
+
+	virtual ~AMateria();
 
 /* Operators */
-	Animal	&operator=(Animal const &src);
-
-/* Destructors */
-	virtual ~Animal();
-
-/* Actions */
-	virtual void	makeSound() const = 0;
+	AMateria &operator=(AMateria const &src);
 
 /* Getters */
-	std::string		getType() const;
+	const std::string &getType() const;
 
 /* Setters */
-    void			setType(std::string type);
+	void setType(const std::string &type);
+
+/* Methods */
+	virtual AMateria *clone() const = 0;
+	virtual void use(ICharacter &target) = 0;
 };
 
 #endif

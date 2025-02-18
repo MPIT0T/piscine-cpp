@@ -6,20 +6,14 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 18:10:04 by mpitot            #+#    #+#              #
-#    Updated: 2024/10/14 09:29:08 by mpitot           ###   ########.fr        #
+#    Updated: 2024/10/15 13:22:04 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	main.cpp		\
-			AMateria.cpp	\
-			Ice.cpp			\
-			Cure.cpp		\
-			Character.cpp
+			Bureaucrat.cpp
 
-HEADERS	=	AMateria.hpp	\
-			Ice.hpp			\
-			Cure.hpp		\
-			Character.hpp
+HEADERS	=	Bureaucrat.hpp
 
 OBJS	=	$(SRCS:%.cpp=${OBJ_D}%.o)
 
@@ -31,7 +25,7 @@ HEAD_D	=	includes/
 
 HEAD	=	$(addprefix $(HEAD_D), $(HEADERS))
 
-NAME	=	intelligence
+NAME	=	ex00
 
 CC		=	c++
 

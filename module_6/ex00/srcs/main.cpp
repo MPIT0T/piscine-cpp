@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 21:31:46 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/07 11:01:33 by mpitot           ###   ########.fr       */
+/*   Created: 2024/09/16 18:44:04 by mpitot            #+#    #+#             */
+/*   Updated: 2024/10/13 22:43:37 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#include "ScalarConverter.hpp"
 
-# include "Animal.hpp"
-# include "Brain.hpp"
-
-class Cat : public Animal
+int	main(int ac, char **av)
 {
-private:
-	Brain	*_brain;
-
-public:
-/* Constructors */
-	Cat();
-	Cat(Cat const &src);
-
-/* Operators */
-	Cat	&operator=(Cat const &src);
-
-/* Destructors */
-	~Cat();
-
-/* Actions */
-	void makeSound() const;
-
-};
-
-#endif
+	if (ac != 2)
+		return (1);
+	ScalarConverter::convert(av[1]);
+	return (0);
+}

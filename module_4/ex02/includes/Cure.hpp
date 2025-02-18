@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cure.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 21:35:18 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/07 16:44:33 by mpitot           ###   ########.fr       */
+/*   Created: 2024/10/13 22:59:17 by mpitot            #+#    #+#             */
+/*   Updated: 2024/10/14 09:16:26 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef CURE_HPP
+# define CURE_HPP
 
-# include "Animal.hpp"
-# include "Brain.hpp"
+# include <AMateria.hpp>
 
-class Dog : public Animal
+class Cure : public AMateria
 {
-private:
-	Brain	*_brain;
-
 public:
 /* Constructors */
-	Dog();
-	Dog(Dog const &src);
+	Cure();
+	Cure(std::string const &type);
+	Cure(Cure const &src);
 
-/* Destructors */
-	~Dog();
+	~Cure();
 
 /* Operators */
-	Dog	&operator=(Dog const &src);
+	Cure		&operator=(Cure const &src);
 
-/* Actions */
-	void makeSound() const;
-
+/* Methods */
+	AMateria	*clone() const;
+	void		use(ICharacter &target);
 };
 
 #endif
