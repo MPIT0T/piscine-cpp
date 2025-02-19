@@ -16,16 +16,21 @@ AForm::AForm(const AForm &src) : _name(src._name), _signState(false), _gradeToSi
 AForm::~AForm() {}
 
 /* Operators **************************************************************** */
-AForm &AForm::operator=(const AForm &src) { (void) src; return (*this); }
+AForm &AForm::operator=(const AForm &src)
+{
+	if (this != &src)
+		_signState = src.signState();
+	return (*this);
+}
 
 /* Getters ****************************************************************** */
-const std::string &AForm::name() { return (_name); }
+const std::string &AForm::name() const { return (_name); }
 
-bool &AForm::signState() { return (_signState); }
+const bool &AForm::signState() const { return (_signState); }
 
-const int &AForm::gradeToSign() { return (_gradeToSign); }
+const int &AForm::gradeToSign() const { return (_gradeToSign); }
 
-const int &AForm::gradeToExecute() { return (_gradeToExecute); }
+const int &AForm::gradeToExecute() const { return (_gradeToExecute); }
 
 /* Setters ****************************************************************** */
 void AForm::beSigned(const Bureaucrat &bureaucrat)
@@ -49,6 +54,11 @@ const char* AForm::GradeTooLowException::what() const throw()
 const char* AForm::FormAlreadySignedException::what() const throw()
 {
 	return ("Form already signed");
+}
+
+const char * AForm::FormNotSignedException::what() const throw()
+{
+	return ("Form needs to be signed to be executed");
 }
 
 /* ostream ****************************************************************** */

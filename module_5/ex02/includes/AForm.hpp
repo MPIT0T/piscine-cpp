@@ -18,10 +18,10 @@ public:
 	AForm &operator=(const AForm &src);
 
 /* Getters */
-	const std::string	&name();
-	bool				&signState();
-	const int			&gradeToSign();
-	const int			&gradeToExecute();
+	const std::string	&name() const;
+	const bool				&signState() const;
+	const int			&gradeToSign() const;
+	const int			&gradeToExecute()const ;
 
 /* Setters */
 	void				beSigned(const Bureaucrat &bureaucrat);
@@ -41,6 +41,12 @@ public:
 	};
 
 	class FormAlreadySignedException : public std::exception
+	{
+	public :
+		virtual const char *what() const throw();
+	};
+
+	class FormNotSignedException : public std::exception
 	{
 	public :
 		virtual const char *what() const throw();
