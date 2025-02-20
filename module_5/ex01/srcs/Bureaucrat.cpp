@@ -81,7 +81,7 @@ void Bureaucrat::signForm(Form& form)
 {
 	try
 	{
-		form.beSigned(this);
+		form.beSigned(*this);
 	}
 	catch (std::exception &e)
 	{
@@ -101,7 +101,7 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 }
 
 /* ostream ****************************************************************** */
-std::ostream& operator<<(std::ostream &OUT, const Bureaucrat& bureaucrat)
+std::ostream &operator<<(std::ostream &OUT, const Bureaucrat &bureaucrat)
 {
 	OUT << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << std::endl;
 	return (OUT);

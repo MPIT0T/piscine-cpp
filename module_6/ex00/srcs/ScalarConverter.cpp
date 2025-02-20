@@ -61,7 +61,7 @@ int ScalarConverter::toInt(const std::string& literal)
 	std::stringstream ss(literal);
 	int i;
 	ss >> i;
-	if (ss.eof() && ss.fail())
+	if (!ss.eof() || ss.fail())
 		return (1);
 	std::cout << "---[int]---" << std::endl;
 	put_types(static_cast<char>(i), i, static_cast<float>(i), static_cast<double>(i));
@@ -73,7 +73,7 @@ int ScalarConverter::toFloat(const std::string& literal)
 	std::stringstream ss(literal);
 	float f;
 	ss >> f;
-	if (ss.eof() && ss.fail())
+	if (!ss.eof() || ss.fail())
 		return (1);
 	std::cout << "---[float]---" << std::endl;
 	put_types(static_cast<char>(f), static_cast<int>(f), f, static_cast<double>(f));
@@ -85,7 +85,7 @@ int ScalarConverter::toDouble(const std::string& literal)
 	std::stringstream ss(literal);
 	double d;
 	ss >> d;
-	if (ss.eof() && ss.fail())
+	if (!ss.eof() || ss.fail())
 		return (1);
 	std::cout << "---[double]---" << std::endl;
 	put_types(static_cast<char>(d), static_cast<int>(d), static_cast<float>(d), d);

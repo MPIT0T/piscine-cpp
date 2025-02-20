@@ -27,7 +27,7 @@ HEAD_D	=	includes/
 
 HEAD	=	$(addprefix $(HEAD_D), $(HEADERS))
 
-NAME	=	ex00
+NAME	=	ex01
 
 CC		=	c++
 

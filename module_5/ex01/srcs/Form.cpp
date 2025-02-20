@@ -3,22 +3,39 @@
 /* ***************** */
 
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
+#include <iostream>
 
 /* Constructors ************************************************************* */
-Form::Form() : _name("undefined"), _signState(false), _gradeToSign(-1), _gradeToExecute(-1) {}
+Form::Form() :
+_name("undefined"),
+_signState(false), _gradeToSign(-1),
+_gradeToExecute(-1)
+{}
 
-Form::Form(const std::string name, int gradeToSign, int gradeToExecute) : _name(name), _signState(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {}
+Form::Form(const std::string name, const int gradeToSign, const int gradeToExecute) :
+_name(name),
+_signState(false),
+_gradeToSign(gradeToSign),
+_gradeToExecute(gradeToExecute)
+{}
 
-Form::Form(const Form &src)
-{
-	*this = src;
-}
+Form::Form(const Form &src) :
+_name(src._name),
+_signState(src._signState),
+_gradeToSign(src._gradeToSign),
+_gradeToExecute(src._gradeToExecute)
+{}
 
 Form::~Form() {}
 
 /* Operators **************************************************************** */
 Form &Form::operator=(const Form &src)
 {
+	if (this != &src)
+	{
+		_signState = src._signState;
+	}
 	return (*this);
 }
 
@@ -68,13 +85,13 @@ const char* Form::FormAlreadySignedException::what() const throw()
 }
 
 /* ostream ****************************************************************** */
-std::ostream& operator<<(std::ostream OUT, Form &form)
+std::ostream& operator<<(std::ostream &OUT, Form &form)
 {
-	std::cout
-		<< "FORM :" << std::endl
+	OUT	<< "FORM :" << std::endl
 		<< "name : " << form.name() << std::endl
 		<< "signed : " << form.signState() << std::endl
 		<< "grade to sign : " << form.gradeToSign() << std::endl
 		<< "grade to execute : " << form.gradeToExecute() << std::endl
 		<< std::endl;
+	return (OUT);
 }

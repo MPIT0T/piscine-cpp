@@ -5,14 +5,14 @@
 #ifndef FORM_HPP
 # define FORM_HPP
 
-# include <Bureaucrat.hpp>
 # include <string>
+
+class Bureaucrat;
 
 class Form
 {
 public:
 /* Constructors */
-	Form();
 	Form(const std::string name, int gradeToSign, int gradeToExecute);
 	Form(const Form &src);
 	~Form();
@@ -53,6 +53,8 @@ private:
 	bool				_signState;
 	const int			_gradeToSign;
 	const int			_gradeToExecute;
+
+	Form();
 };
 
 std::ostream&	operator<<(std::ostream OUT, Form &form);
