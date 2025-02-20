@@ -17,21 +17,18 @@ int	main()
 
 	try
 	{
-		fred.incrementGrade();
-		fred.decrementGrade();
-		// fred.decrementGrade();	//should throw "grade too low"
-
-		michel.decrementGrade();
-		michel.incrementGrade();
-		michel.setGrade(3);
-
-		// seb.incrementGrade();	//should throw "grade too high"
-
 		// scf.execute(fred);			//should throw "Form needs to be signed to be executed"
 		// scf.beSigned(fred);			//should throw "Grade too low"
 
 		scf.beSigned(michel);
 		scf.execute(michel);
+
+		michel.setGrade(72);
+		rrf.beSigned(michel);
+		rrf.execute(seb);
+
+		ppf.beSigned(seb);
+		ppf.execute(zaphod);
 
 		std::cout << "All operations done successfully" << std::endl;
 	}

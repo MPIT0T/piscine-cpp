@@ -1,6 +1,5 @@
 #include "Intern.hpp"
 #include <iostream>
-#include <map>
 #include <PresidentialPardonForm.hpp>
 #include <RobotomyRequestForm.hpp>
 #include <ShrubberyCreationForm.hpp>
@@ -23,11 +22,11 @@ Intern &Intern::operator=(const Intern &src)
 }
 
 /* Methods ****************************************************************** */
-static size_t hash_level(const std::string &level)
+static unsigned int hash_level(const std::string &level)
 {
-	size_t hash = 0;
+	unsigned int hash = 0;
 
-	for (size_t i = 0; level[i]; i++)
+	for (unsigned int i = 0; level[i]; i++)
 		hash = hash * 31 + level[i];
 
 	return (hash);
@@ -37,17 +36,17 @@ AForm *Intern::makeForm(const std::string &level, const std::string &target)
 {
 	switch (hash_level(level))
 	{
-		case 14756678533376535723:
+		case 512388267:
 		{
 			std::cout << "Intern creates " << level << std::endl;
 			return new ShrubberyCreationForm(target);
 		}
-		case 11107267574772629792:
+		case 2877915424:
 		{
 			std::cout << "Intern creates " << level << std::endl;
 			return new RobotomyRequestForm(target);
 		}
-		case 7769190716560145934:
+		case 886341134:
 		{
 			std::cout << "Intern creates " << level << std::endl;
 			return new PresidentialPardonForm(target);
