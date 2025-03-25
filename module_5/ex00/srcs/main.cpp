@@ -10,35 +10,74 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include "Bureaucrat.hpp"
 
-int	main()
+int main()
 {
-	Bureaucrat	fred("Frederique", 150);
-	Bureaucrat	michel("Michel", 100);
-	Bureaucrat	seb("Sebastien", 1);
-
 	try
 	{
-		fred.incrementGrade();
-		fred.decrementGrade();
-		// fred.decrementGrade();	//should throw "grade too low"
+		// Valid Bureaucrats
+		Bureaucrat b1("Alice", 1);
+		Bureaucrat b2("Bob", 150);
+		Bureaucrat b3("Charlie", 75);
 
-		michel.decrementGrade();
-		michel.incrementGrade();
-		michel.setGrade(3);
+		std::cout << b1 << std::endl;
+		std::cout << b2 << std::endl;
+		std::cout << b3 << std::endl;
 
-		// seb.incrementGrade();	//should throw "grade too high"
+		try // Testing increment (should throw for b1)
+		{
+			std::cout << "Incrementing Alice's grade..." << std::endl;
+			b1.incrementGrade(); // Should throw GradeTooHighException
+		}
+		catch (const std::exception &e)
+		{
+			std::cerr << "Exception caught: " << e.what() << std::endl;
+		}
 
-		std::cout << "All operations done successfully" << std::endl;
+		try // Testing decrement (should throw for b2)
+		{
+			std::cout << "Decrementing Bob's grade..." << std::endl;
+			b2.decrementGrade(); // Should throw GradeTooLowException
+		}
+		catch (const std::exception &e)
+		{
+			std::cerr << "Exception caught: " << e.what() << std::endl;
+		}
+
+		// Normal increment and decrement
+		std::cout << "Incrementing Charlie's grade..." << std::endl;
+		b3.incrementGrade();
+		std::cout << b3 << std::endl;
+
+		std::cout << "Decrementing Charlie's grade..." << std::endl;
+		b3.decrementGrade();
+		std::cout << b3 << std::endl;
+
+		// Invalid Bureaucrat creation (should throw exceptions)
+		try
+		{
+			Bureaucrat b4("David", 0); // Too high
+		}
+		catch (const std::exception &e)
+		{
+			std::cerr << "Exception caught: " << e.what() << std::endl;
+		}
+
+		try
+		{
+			Bureaucrat b5("Eve", 151); // Too low
+		}
+		catch (const std::exception &e)
+		{
+			std::cerr << "Exception caught: " << e.what() << std::endl;
+		}
+
 	}
-	catch (Bureaucrat::GradeTooHighException &e)
+	catch (const std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << "Unexpected exception: " << e.what() << std::endl;
 	}
-	catch (Bureaucrat::GradeTooLowException &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	return (0);
+	return 0;
 }
