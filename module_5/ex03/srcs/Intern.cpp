@@ -4,57 +4,41 @@
 #include <RobotomyRequestForm.hpp>
 #include <ShrubberyCreationForm.hpp>
 
-/* Constructors ************************************************************* */
-Intern::Intern() {}
+Intern::Intern()
+{
+	_forms.insert(std::make_pair("shrubbery creation", new ShrubberyCreationForm("undefined")));
+	_forms.insert(std::make_pair("robotomy request", new RobotomyRequestForm("undefined")));
+	_forms.insert(std::make_pair("presidential pardon", new PresidentialPardonForm("undefined")));
+}
 
 Intern::Intern(const Intern &src)
 {
-	*this = src;
+	(void) src;
 }
 
-Intern::~Intern() {}
+Intern::~Intern()
+{
+	for (std::map<std::string, AForm *>::iterator it = _forms.begin(); it != _forms.end(); ++it)
+		delete it->second;
+}
 
-/* Operators **************************************************************** */
 Intern &Intern::operator=(const Intern &src)
 {
 	(void) src;
-	return (*this);
+	return *this;
 }
 
-/* Methods ****************************************************************** */
-static unsigned int hash_level(const std::string &level)
+AForm *Intern::makeForm(const std::string &formName, const std::string &target)
 {
-	unsigned int hash = 0;
+	AForm *form = NULL;
+	std::map<std::string, AForm *>::iterator it = _forms.find(formName);
 
-	for (unsigned int i = 0; level[i]; i++)
-		hash = hash * 31 + level[i];
-
-	return (hash);
-}
-
-AForm *Intern::makeForm(const std::string &level, const std::string &target)
-{
-	switch (hash_level(level))
+	if (it != _forms.end())
 	{
-		case 512388267:
-		{
-			std::cout << "Intern creates " << level << std::endl;
-			return new ShrubberyCreationForm(target);
-		}
-		case 2877915424:
-		{
-			std::cout << "Intern creates " << level << std::endl;
-			return new RobotomyRequestForm(target);
-		}
-		case 886341134:
-		{
-			std::cout << "Intern creates " << level << std::endl;
-			return new PresidentialPardonForm(target);
-		}
-		default:
-		{
-			std::cout << "This form doesn't exist" << std::endl;
-			return (NULL);
-		}
+		form = it->second->clone(target);
+		std::cout << "Intern creates " << formName << std::endl;
 	}
+	else
+		std::cerr << "Intern cannot create " << formName << std::endl;
+	return form;
 }

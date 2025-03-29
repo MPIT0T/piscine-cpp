@@ -2,47 +2,52 @@
 #include <Bureaucrat.hpp>
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
-/* Constructors ************************************************************* */
 RobotomyRequestForm::RobotomyRequestForm() :
 AForm(),
 _target("undefined")
 {}
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) :
-AForm("RobotomyRequestForm", 72, 5),
+AForm("RobotomyRequestForm", 72, 45),
 _target(target)
 {}
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src) :
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src):
 AForm(src)
 {
-	*this = src;
+	_target = src._target;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
-/* Operators **************************************************************** */
 RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &src)
 {
 	if (this != &src)
 	{
-		this->AForm::operator=(src);
+		AForm::operator=(src);
 		_target = src._target;
 	}
-	return (*this);
+	return *this;
 }
 
-/* Methods ****************************************************************** */
-void RobotomyRequestForm::execute(Bureaucrat const& executor) const
+void RobotomyRequestForm::execute(const Bureaucrat &bureaucrat) const
 {
-	if (executor.getGrade() > gradeToSign())
-		throw (AForm::GradeTooLowException());
+	if (!getSignState())
+		throw FormNotSignedException();
+	if (bureaucrat.getGrade() > getGradeToExecute())
+		throw GradeTooLowException();
 
 	std::srand(std::time(0));
 	int		randomNumber = std::rand() % 2;
 	if (randomNumber == 0)
-		std::cout << executor.getName() << " has been robotomised." << std::endl;
+		std::cout << bureaucrat.getName() << " has been robotomised." << std::endl;
 	else
-		std::cout << executor.getName() << "'s robotomy failed." << std::endl;
+		std::cout << bureaucrat.getName() << "'s robotomy failed." << std::endl;
+}
+
+AForm *RobotomyRequestForm::clone(const std::string &target) const
+{
+	return new RobotomyRequestForm(target);
 }

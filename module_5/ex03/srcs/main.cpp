@@ -1,42 +1,51 @@
-#include <Intern.hpp>
-#include <PresidentialPardonForm.hpp>
-#include <RobotomyRequestForm.hpp>
-#include <ShrubberyCreationForm.hpp>
-
+#include <iostream>
 #include "Bureaucrat.hpp"
+#include "Intern.hpp"
 
-int	main()
+int main()
 {
-	Bureaucrat	fred("Frederique", 150);
-	Bureaucrat	michel("Michel", 100);
-	Bureaucrat	seb("Sebastien", 25);
-	Bureaucrat	zaphod("Zaphod Beeblebox", 1);
-
-	Intern	someRandomIntern;
-	AForm	*form;
-
 	try
 	{
-		form = someRandomIntern.makeForm("shrubbery creation", "test");
-		form->beSigned(michel);
-		form->execute(michel);
-		delete form ;
+		Intern intern;
+		Bureaucrat alice("Alice", 1);
+		Bureaucrat bob("Bob", 50);
 
-		form = someRandomIntern.makeForm("robotomy request", "Sebastien");
-		form->beSigned(seb);
-		form->execute(seb);
-		delete form ;
+		// Intern creates forms
+		AForm* shrubberyForm = intern.makeForm("shrubbery creation", "Home");
+		AForm* robotomyForm = intern.makeForm("robotomy request", "Bender");
+		AForm* pardonForm = intern.makeForm("presidential pardon", "Zaphod");
+		AForm* invalidForm = intern.makeForm("invalid form", "Nowhere");
 
-		form = someRandomIntern.makeForm("presidential pardon", "Frederique");
-		form->beSigned(zaphod);
-		form->execute(zaphod);
-		delete form ;
+		if (shrubberyForm)
+		{
+			alice.signForm(*shrubberyForm);
+			alice.executeForm(*shrubberyForm);
+			delete shrubberyForm;
+		}
 
-		std::cout << "All operations done successfully" << std::endl;
+		if (robotomyForm)
+		{
+			bob.signForm(*robotomyForm); // Should fail
+			alice.signForm(*robotomyForm); // Should succeed
+			alice.executeForm(*robotomyForm);
+			delete robotomyForm;
+		}
+
+		if (pardonForm)
+		{
+			alice.signForm(*pardonForm);
+			alice.executeForm(*pardonForm);
+			delete pardonForm;
+		}
+
+		if (invalidForm)
+		{
+			delete invalidForm; // Should never happen
+		}
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << "Unexpected exception: " << e.what() << std::endl;
 	}
-	return (0);
+	return 0;
 }

@@ -3,7 +3,7 @@
 
 Bureaucrat::Bureaucrat() : _name("undefined"), _grade(150) {}
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
+Bureaucrat::Bureaucrat(const std::string &name, const int &grade) : _name(name)
 {
 	if (grade < 1)
 		throw GradeTooHighException();
@@ -12,30 +12,30 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 	_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& copy)
+Bureaucrat::Bureaucrat(const Bureaucrat& copy) : _name(copy.getName()), _grade(copy.getGrade()) {}
+
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy)
 {
-	*this = copy;
+	if (this != &copy)
+	{
+		_grade = copy.getGrade();
+	}
+	return (*this);
 }
 
 Bureaucrat::~Bureaucrat() {}
 
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& copy)
+const std::string &Bureaucrat::getName() const
 {
-	(void) copy;
-	return (*this);
+	return (_name);
 }
 
-const std::string& Bureaucrat::getName() const
+const int &Bureaucrat::getGrade() const
 {
-	return (this->_name);
+	return (_grade);
 }
 
-const int& Bureaucrat::getGrade() const
-{
-	return (this->_grade);
-}
-
-void Bureaucrat::setGrade(int grade)
+void Bureaucrat::setGrade(const int &grade)
 {
 	if (grade < 1)
 		throw GradeTooHighException();

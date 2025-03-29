@@ -1,22 +1,21 @@
 #ifndef INTERN_HPP
 # define INTERN_HPP
-#include <AForm.hpp>
+
+# include <AForm.hpp>
+#include <map>
 
 class Intern
 {
 public:
-/* Constructors */
 	Intern();
 	Intern(const Intern &src);
+	Intern &operator=(const Intern &src);
 	~Intern();
 
-/* Operators */
-	Intern &operator=(const Intern &src);
-	
-/* Methods */
 	AForm *makeForm(const std::string &level, const std::string &target);
+
 private:
-	
+	std::map<std::string, AForm *> _forms;
 };
 
 

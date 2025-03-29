@@ -1,51 +1,45 @@
 #include "ShrubberyCreationForm.hpp"
-#include <iostream>
 #include <Bureaucrat.hpp>
 #include <fstream>
 
-
-/* Constructors ************************************************************* */
-ShrubberyCreationForm::ShrubberyCreationForm() :
-AForm(),
-_target("undefined")
-{}
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm()
+{
+	_target = "undefined";
+}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) :
 AForm("ShrubberyCreationForm", 145, 137),
 _target(target)
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) :
-AForm(src)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : AForm(src)
 {
-	*this = src;
+	_target = src._target;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
-/* Operators **************************************************************** */
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &src)
 {
 	if (this != &src)
 	{
-		this->AForm::operator=(src);
+		AForm::operator=(src);
 		_target = src._target;
 	}
-	return (*this);
+	return *this;
 }
 
-/* Methods ****************************************************************** */
-void ShrubberyCreationForm::execute(Bureaucrat const& executor) const
+void ShrubberyCreationForm::execute(const Bureaucrat &bureaucrat) const
 {
-	if (!signState())
-		throw (FormNotSignedException());
-	if (executor.getGrade() > gradeToExecute())
-		throw (GradeTooLowException());
+	if (!getSignState())
+		throw FormNotSignedException();
+	if (bureaucrat.getGrade() > getGradeToExecute())
+		throw GradeTooLowException();
 
 	std::string		fileName = _target + "_shrubbery";
 	std::ofstream	file(fileName.data());
 	if (!file)
-		throw (std::runtime_error("error opening file."));
+		throw std::runtime_error("error opening file.");
 
 	file << "     ccee88oo" << std::endl;
 	file << "  C8O8O8Q8PoOb o8oo" << std::endl;
@@ -60,6 +54,4 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 	file << "   .....//||||\\...." << std::endl;
 
 	file.close();
-
-	std::cout << executor.getName() << " executed " << this->name() << std::endl;
 }

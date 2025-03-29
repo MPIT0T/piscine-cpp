@@ -1,7 +1,3 @@
-/* ***************** */
-/*      WebServ      */
-/* ***************** */
-
 #ifndef FORM_HPP
 # define FORM_HPP
 
@@ -12,24 +8,18 @@ class Bureaucrat;
 class Form
 {
 public:
-/* Constructors */
-	Form(const std::string name, int gradeToSign, int gradeToExecute);
+	Form(const std::string &name, const int &gradeToSign, const int &gradeToExecute);
 	Form(const Form &src);
+	Form &operator=(const Form &src);
 	~Form();
 
-/* Operators */
-	Form &operator=(const Form &src);
+	const std::string	&getName() const;
+	const bool			&getSignState() const;
+	const int			&getGradeToSign() const;
+	const int			&getGradeToExecute() const;;
 
-/* Getters */
-	const std::string	&name();
-	bool				&signState();
-	const int			&gradeToSign();
-	const int			&gradeToExecute();
+	void	beSigned(const Bureaucrat &bureaucrat);
 
-/* Setters */
-	void				beSigned(const Bureaucrat &bureaucrat);
-
-/* Exceptions */
 	class GradeTooHighException : public std::exception
 	{
 	public:
@@ -55,8 +45,9 @@ private:
 	const int			_gradeToExecute;
 
 	Form();
+
 };
 
-std::ostream&	operator<<(std::ostream OUT, Form &form);
+std::ostream &operator<<(std::ostream &OUT, const Form &form);
 
 #endif //FORM_HPP
