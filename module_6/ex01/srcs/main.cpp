@@ -1,30 +1,27 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 18:44:04 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/13 22:43:37 by mpitot           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Serializer.hpp"
 #include "Data.hpp"
 #include <iostream>
 
-int	main(void)
+int main()
 {
-	Data		data = {42};
-	uintptr_t	rawData = Serializer::serialize(&data);
+	Data myData = {42};
 
-	std::cout << "Address: " << &data << std::endl << "Content: " << data.num << std::endl << std::endl;
-	std::cout << "Serialized: " << rawData << std::endl << std::endl;
+	std::cout << "Original Data address: " << &myData << "\n";
 
-	Data *newData = Serializer::deserialize(rawData);
+	uintptr_t raw = Serializer::serialize(&myData);
+	Data* deserializedData = Serializer::deserialize(raw);
 
-	std::cout << "Address: " << newData << std::endl << "Content: " << newData->num << std::endl << std::endl;
+	std::cout << "Deserialized Data address: " << deserializedData << "\n";
 
-	return (0);
+	if (deserializedData == &myData)
+	{
+		std::cout << "Success: The deserialized pointer matches the original.\n";
+		std::cout << "ID: " << deserializedData->num << std::endl;
+	}
+	else
+	{
+		std::cout << "Error: Pointers do not match!\n";
+	}
+
+	return 0;
 }

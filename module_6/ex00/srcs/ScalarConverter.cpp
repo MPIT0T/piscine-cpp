@@ -3,7 +3,6 @@
 #include <iostream>
 #include <limits>
 
-/* Constructors ************************************************************* */
 ScalarConverter::ScalarConverter() {}
 
 ScalarConverter::ScalarConverter(const ScalarConverter &src)
@@ -13,15 +12,13 @@ ScalarConverter::ScalarConverter(const ScalarConverter &src)
 
 ScalarConverter::~ScalarConverter() {}
 
-/* Operators **************************************************************** */
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 {
 	(void) src;
-	return (*this);
+	return *this;
 }
 
-/* Methods ****************************************************************** */
-void ScalarConverter::put_types(char c, int i, float f, double d)
+void ScalarConverter::put_types(const char &c, const int &i, const float &f, const double &d)
 {
 	if (i > 127 || i < 0)
 		std::cout << "[  char] : impossible" << std::endl;
@@ -50,10 +47,10 @@ void ScalarConverter::put_types(char c, int i, float f, double d)
 int ScalarConverter::toChar(const std::string& literal)
 {
 	if (literal[1] || (literal[0] >= '0' && literal[0] <= '9'))
-		return (1);
+		return 1;
 	std::cout << "---[char]---" << std::endl << std::endl;
 	put_types(literal[0], static_cast<int>(literal[0]), static_cast<float>(literal[0]), static_cast<double>(literal[0]));
-	return (0);
+	return 0;
 }
 
 int ScalarConverter::toInt(const std::string& literal)
@@ -62,10 +59,10 @@ int ScalarConverter::toInt(const std::string& literal)
 	int i;
 	ss >> i;
 	if (!ss.eof() || ss.fail())
-		return (1);
+		return 1;
 	std::cout << "---[int]---" << std::endl;
 	put_types(static_cast<char>(i), i, static_cast<float>(i), static_cast<double>(i));
-	return (0);
+	return 0;
 }
 
 int ScalarConverter::toFloat(const std::string& literal)
@@ -74,10 +71,10 @@ int ScalarConverter::toFloat(const std::string& literal)
 	float f;
 	ss >> f;
 	if (!ss.eof() || ss.fail())
-		return (1);
+		return 1;
 	std::cout << "---[float]---" << std::endl;
 	put_types(static_cast<char>(f), static_cast<int>(f), f, static_cast<double>(f));
-	return (0);
+	return 0;
 }
 
 int ScalarConverter::toDouble(const std::string& literal)
@@ -86,10 +83,10 @@ int ScalarConverter::toDouble(const std::string& literal)
 	double d;
 	ss >> d;
 	if (!ss.eof() || ss.fail())
-		return (1);
+		return 1;
 	std::cout << "---[double]---" << std::endl;
 	put_types(static_cast<char>(d), static_cast<int>(d), static_cast<float>(d), d);
-	return (0);
+	return 0;
 }
 
 int ScalarConverter::toSpec(const std::string& literal)
@@ -100,7 +97,7 @@ int ScalarConverter::toSpec(const std::string& literal)
 		std::cout << "[   int] : impossible" << std::endl;
 		std::cout << "[ float] : " << literal << "f" << std::endl;
 		std::cout << "[double] : " << literal << std::endl;
-		return (0);
+		return 0;
 	}
 	if (literal == "+inff" || literal == "-inff")
 	{
@@ -108,7 +105,7 @@ int ScalarConverter::toSpec(const std::string& literal)
 		std::cout << "[   int] : impossible" << std::endl;
 		std::cout << "[ float] : " << literal << std::endl;
 		std::cout << "[double] : " << literal.substr(0, 4) << std::endl;
-		return (0);
+		return 0;
 	}
 	if (literal == "nanf")
 	{
@@ -116,9 +113,9 @@ int ScalarConverter::toSpec(const std::string& literal)
 		std::cout << "[   int] : impossible" << std::endl;
 		std::cout << "[ float] : " << literal << std::endl;
 		std::cout << "[double] : " << literal.substr(0, 3) << std::endl;
-		return (0);
+		return 0;
 	}
-	return (1);
+	return 1;
 }
 
 int ScalarConverter::toImpossible()
@@ -127,7 +124,7 @@ int ScalarConverter::toImpossible()
 	std::cout << "[   int] : impossible" << std::endl;
 	std::cout << "[ float] : impossible" << std::endl;
 	std::cout << "[double] : impossible" << std::endl;
-	return (0);
+	return 0;
 }
 
 void ScalarConverter::convert(const std::string &literal)

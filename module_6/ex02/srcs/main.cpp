@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 18:44:04 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/13 22:43:37 by mpitot           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
@@ -79,10 +67,14 @@ void identify(Base &ref)
 int	main(void)
 {
 	Base *test = generate();
-	identify(NULL);
-	identify(test);
-	if (test != NULL)
-		identify(*test);
+
+	identify(NULL); //should output "NULL pointer"
+
+	identify(test); //should output the A, B or C
+
+	if (test != NULL) //good practice, but never happens to be NULL
+		identify(*test); //should output the same type as the test before
+
 	delete test;
 	return (0);
 

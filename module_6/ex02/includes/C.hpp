@@ -5,4 +5,4 @@
 
 class C : public Base {};
 
-#endif //C_HPP
+#endif

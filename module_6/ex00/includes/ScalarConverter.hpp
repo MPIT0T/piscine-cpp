@@ -6,20 +6,16 @@
 class ScalarConverter
 {
 public:
-/* Methods */
 	static void convert(const std::string &literal);
 
 private:
-/* Constructors */
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter &src);
 	~ScalarConverter();
 
-/* Operators */
 	ScalarConverter &operator=(const ScalarConverter &src);
 
-/* Methods */
-	static void		put_types(char c, int i, float f, double d);
+	static void		put_types(const char &c, const int &i, const float &f, const double &d);
 
 	static int		toChar(const std::string &literal);
 	static int		toInt(const std::string &literal);
@@ -32,4 +28,4 @@ private:
 
 
 
-#endif //SCALARCONVERTER_HPP
+#endif
