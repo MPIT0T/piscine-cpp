@@ -8,14 +8,15 @@ class Intern
 {
 public:
 	Intern();
-	Intern(const Intern &src);
-	Intern &operator=(const Intern &src);
 	~Intern();
 
-	AForm *makeForm(const std::string &level, const std::string &target);
+	AForm *makeForm(const std::string &formName, const std::string &target);
 
 private:
 	std::map<std::string, AForm *> _forms;
+
+	Intern(const Intern &src);
+	Intern &operator=(const Intern &src);
 };
 
 
