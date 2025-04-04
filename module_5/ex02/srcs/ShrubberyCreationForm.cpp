@@ -2,20 +2,11 @@
 #include <Bureaucrat.hpp>
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm()
-{
-	_target = "undefined";
-}
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm(), _target("undefined") {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) :
-AForm("ShrubberyCreationForm", 145, 137),
-_target(target)
-{}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : AForm(src)
-{
-	_target = src._target;
-}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : AForm(src), _target(src._target) {}
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 

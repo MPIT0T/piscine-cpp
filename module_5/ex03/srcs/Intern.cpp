@@ -4,23 +4,14 @@
 #include <RobotomyRequestForm.hpp>
 #include <ShrubberyCreationForm.hpp>
 
-Intern::Intern()
-{
-	_forms.insert(std::make_pair("shrubbery creation", new ShrubberyCreationForm("undefined")));
-	_forms.insert(std::make_pair("robotomy request", new RobotomyRequestForm("undefined")));
-	_forms.insert(std::make_pair("presidential pardon", new PresidentialPardonForm("undefined")));
-}
+Intern::Intern() {}
 
 Intern::Intern(const Intern &src)
 {
 	(void) src;
 }
 
-Intern::~Intern()
-{
-	for (std::map<std::string, AForm *>::iterator it = _forms.begin(); it != _forms.end(); ++it)
-		delete it->second;
-}
+Intern::~Intern() {}
 
 Intern &Intern::operator=(const Intern &src)
 {
@@ -28,17 +19,48 @@ Intern &Intern::operator=(const Intern &src)
 	return *this;
 }
 
-AForm *Intern::makeForm(const std::string &formName, const std::string &target)
+const char *Intern::UnknownFormException::what() const throw()
 {
-	AForm *form = NULL;
-	std::map<std::string, AForm *>::iterator it = _forms.find(formName);
+	return "Unknown form";
+}
 
-	if (it != _forms.end())
+AForm * Intern::makeShrubberyCreationForm(const std::string &target) const
+{
+	return new ShrubberyCreationForm(target);
+}
+
+AForm * Intern::makeRobotomyRequestForm(const std::string &target) const
+{
+	return new RobotomyRequestForm(target);
+}
+
+AForm * Intern::makePresidentialPardonForm(const std::string &target) const
+{
+	return new PresidentialPardonForm(target);
+}
+
+AForm *Intern::makeForm(const std::string &formName, const std::string &target) const
+{
+	const std::string names[] =
+		{
+			"shrubbery creation",
+			"robotomy request",
+			"presidential pardon"
+		};
+	AForm *(Intern::*makers[])(const std::string &) const =
+		{
+			&Intern::makeShrubberyCreationForm,
+			&Intern::makeRobotomyRequestForm,
+			&Intern::makePresidentialPardonForm
+		};
+	for (size_t i = 0; i < 3; ++i)
 	{
-		form = it->second->clone(target);
-		std::cout << "Intern creates " << formName << std::endl;
+		if (names[i] == formName)
+		{
+			std::cout << "Intern creates " << names[i] << std::endl;
+			return (this->*makers[i])(target);
+		}
 	}
-	else
-		std::cerr << "Intern cannot create " << formName << std::endl;
-	return form;
+
+	return NULL;
 }

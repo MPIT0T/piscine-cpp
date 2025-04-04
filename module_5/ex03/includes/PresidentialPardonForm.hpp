@@ -6,18 +6,16 @@
 class PresidentialPardonForm : public AForm
 {
 public:
+	PresidentialPardonForm();
 	PresidentialPardonForm(const std::string &target);
 	PresidentialPardonForm(const PresidentialPardonForm &src);
 	PresidentialPardonForm &operator=(const PresidentialPardonForm &src);
 	~PresidentialPardonForm();
 
 	void execute(const Bureaucrat &bureaucrat) const;
-	AForm *clone(const std::string &target) const;
 
 private:
 	std::string	_target;
-
-	PresidentialPardonForm();
 };
 
 #endif

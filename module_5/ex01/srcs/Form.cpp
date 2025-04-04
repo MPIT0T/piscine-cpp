@@ -4,7 +4,7 @@
 
 Form::Form() :
 _name("undefined"),
-_signState(false), _gradeToSign(1),
+_signState(false), _gradeToSign(150),
 _gradeToExecute(150)
 {}
 
@@ -12,7 +12,7 @@ Form::Form(const std::string &name, const int &gradeToSign, const int &gradeToEx
 {
 	if (_gradeToSign > 150 || _gradeToExecute > 150)
 		throw GradeTooLowException();
-	if (_gradeToSign < 1 || _gradeToExecute > 150)
+	if (_gradeToSign < 1 || _gradeToExecute < 1)
 		throw GradeTooHighException();
 }
 
@@ -27,13 +27,13 @@ Form &Form::operator=(const Form &src)
 
 Form::~Form() {}
 
-const std::string &Form::getName() const { return (_name); }
+const std::string &Form::getName() const { return _name; }
 
-const bool &Form::getSignState() const { return (_signState); }
+const bool &Form::getSignState() const { return _signState; }
 
-const int &Form::getGradeToSign() const { return (_gradeToSign); }
+const int &Form::getGradeToSign() const { return _gradeToSign; }
 
-const int &Form::getGradeToExecute() const { return (_gradeToExecute); }
+const int &Form::getGradeToExecute() const { return _gradeToExecute; }
 
 void Form::beSigned(const Bureaucrat &bureaucrat)
 {
@@ -51,12 +51,12 @@ const char *Form::GradeTooHighException::what() const throw()
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return ("Grade is too low!");
+	return "Grade is too low!";
 }
 
 const char *Form::FormAlreadySignedException::what() const throw()
 {
-	return ("Form already signed!");
+	return "Form already signed!";
 }
 
 std::ostream &operator<<(std::ostream &OUT, const Form &form)
@@ -66,5 +66,5 @@ std::ostream &operator<<(std::ostream &OUT, const Form &form)
 		OUT << "Yes.";
 	else
 		OUT << "No.";
-	return (OUT);
+	return OUT;
 }

@@ -4,21 +4,11 @@
 #include <ctime>
 #include <iostream>
 
-RobotomyRequestForm::RobotomyRequestForm() :
-AForm(),
-_target("undefined")
-{}
+RobotomyRequestForm::RobotomyRequestForm() : AForm(), _target("undefined") {}
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target) :
-AForm("RobotomyRequestForm", 72, 45),
-_target(target)
-{}
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("RobotomyRequestForm", 72, 45), _target(target) {}
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src):
-AForm(src)
-{
-	_target = src._target;
-}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src): AForm(src), _target(src._target) {}
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
@@ -45,9 +35,4 @@ void RobotomyRequestForm::execute(const Bureaucrat &bureaucrat) const
 		std::cout << bureaucrat.getName() << " has been robotomised." << std::endl;
 	else
 		std::cout << bureaucrat.getName() << "'s robotomy failed." << std::endl;
-}
-
-AForm *RobotomyRequestForm::clone(const std::string &target) const
-{
-	return new RobotomyRequestForm(target);
 }

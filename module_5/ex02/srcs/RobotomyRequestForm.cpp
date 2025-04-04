@@ -4,21 +4,11 @@
 #include <ctime>
 #include <iostream>
 
-RobotomyRequestForm::RobotomyRequestForm() :
-AForm(),
-_target("undefined")
-{}
+RobotomyRequestForm::RobotomyRequestForm() : AForm(), _target("undefined") {}
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target) :
-AForm("RobotomyRequestForm", 72, 45),
-_target(target)
-{}
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("RobotomyRequestForm", 72, 45), _target(target) {}
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src):
-AForm(src)
-{
-	_target = src._target;
-}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src): AForm(src), _target(src._target) {}
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 

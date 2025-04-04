@@ -2,20 +2,11 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 
-PresidentialPardonForm::PresidentialPardonForm() :
-AForm(),
-_target("undefined")
-{}
+PresidentialPardonForm::PresidentialPardonForm() : AForm(), _target("undefined") {}
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string &target) :
-AForm("PresidentialPardonForm", 25, 5),
-_target(target)
-{}
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AForm("PresidentialPardonForm", 25, 5), _target(target) {}
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : AForm(src)
-{
-	_target = src._target;
-}
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : AForm(src), _target(src._target) {}
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 

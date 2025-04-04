@@ -8,6 +8,7 @@ class Bureaucrat;
 class Form
 {
 public:
+	Form();
 	Form(const std::string &name, const int &gradeToSign, const int &gradeToExecute);
 	Form(const Form &src);
 	Form &operator=(const Form &src);
@@ -23,19 +24,19 @@ public:
 	class GradeTooHighException : public std::exception
 	{
 	public:
-		virtual const char *what() const throw();
+		const char *what() const throw();
 	};
 
 	class GradeTooLowException : public std::exception
 	{
 	public:
-		virtual const char *what() const throw();
+		const char *what() const throw();
 	};
 
 	class FormAlreadySignedException : public std::exception
 	{
 	public :
-		virtual const char *what() const throw();
+		const char *what() const throw();
 	};
 
 private:
@@ -43,9 +44,6 @@ private:
 	bool				_signState;
 	const int			_gradeToSign;
 	const int			_gradeToExecute;
-
-	Form();
-
 };
 
 std::ostream &operator<<(std::ostream &OUT, const Form &form);
