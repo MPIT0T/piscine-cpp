@@ -93,35 +93,48 @@ float BitcoinExchange::checkDateValue(const std::string &date, const std::string
     return fValue;
 }
 
-void BitcoinExchange::printLine(const std::string &line) const
+void BitcoinExchange::printLine(const std::string &line, const std::string &sep) const
 {
-    std::string::size_type pipePos = line.find(" | ");
+    std::string::size_type pipePos = line.find(sep);
     if (pipePos == std::string::npos)
         throw std::runtime_error("invalid line");
 
     const std::string date = line.substr(0, pipePos);
-    const std::string value = line.substr(pipePos + 3);
+    const std::string value = line.substr(pipePos + sep.size());
 
     std::cout << date << " => " << value << " = " << checkDateValue(date, value) * getExchangeRate(date) << std::endl;
+}
+
+std::string BitcoinExchange::findSeparator(const std::string &line) const
+{
+    const std::string::size_type dateIndex = line.find("date");
+    const std::string::size_type valueIndex = line.find("value");
+
+    if (dateIndex == std::string::npos || valueIndex == std::string::npos)
+        throw std::runtime_error("Invalid format line");
+
+    std::string separator = line.substr(dateIndex + 4, valueIndex - 4);
+    return separator;
 }
 
 void BitcoinExchange::printExchanges(const std::string &inputFileName) const
 {
     std::ifstream file(inputFileName.c_str());
     if (!file)
-        throw std::runtime_error("Error opening file \"" + inputFileName + "\"");
+        throw std::runtime_error("Error: could not open file \"" + inputFileName + "\"");
 
     std::string line;
+    std::getline(file, line);
+    const std::string separator = findSeparator(line);
     while (std::getline(file, line))
     {
         try
         {
-            printLine(line);
+            printLine(line, separator);
         }
         catch (std::exception &e)
         {
             std::cout << "Error: " << e.what() << std::endl;
-            continue ;
         }
     }
 }

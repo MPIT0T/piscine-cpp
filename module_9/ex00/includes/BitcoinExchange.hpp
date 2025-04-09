@@ -19,7 +19,8 @@ public:
     const std::map<std::string, float> &getTable() const;
     const float &getExchangeRate(const std::string &date) const;
     float checkDateValue(const std::string &date, const std::string &value) const;
-    void printLine(const std::string &line) const;
+    void printLine(const std::string &line, const std::string &sep) const;
+    std::string findSeparator(const std::string &line) const;
 
     void printExchanges(const std::string &inputFileName) const;
 
