@@ -20,7 +20,6 @@ public:
 
 	void				beSigned(const Bureaucrat &bureaucrat);
 	virtual void		execute(const Bureaucrat &bureaucrat) const = 0;
-	virtual AForm		*clone(const std::string &target) const = 0;
 
 	class GradeTooHighException : public std::exception
 	{
