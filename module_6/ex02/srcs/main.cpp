@@ -6,10 +6,10 @@
 #include <ctime>
 #include <iostream>
 
-Base *generate(void)
+Base *generate()
 {
 	std::srand(std::time(0));
-	int randValue = std::rand() % 3;
+	const int randValue = std::rand() % 3;
 
 	if (randValue == 0)
 		return new A();
@@ -17,7 +17,7 @@ Base *generate(void)
 		return new B();
 	if (randValue == 2)
 		return new C();
-	return (NULL);
+	return NULL;
 }
 
 void identify(Base *ptr)
@@ -64,7 +64,7 @@ void identify(Base &ref)
 }
 
 
-int	main(void)
+int	main()
 {
 	Base *test = generate();
 
@@ -76,6 +76,5 @@ int	main(void)
 		identify(*test); //should output the same type as the test before
 
 	delete test;
-	return (0);
-
+	return 0;
 }
