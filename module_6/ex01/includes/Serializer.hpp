@@ -18,6 +18,4 @@ private:
 	Serializer &operator=(const Serializer &src);
 };
 
-
-
-#endif //SERIALIZER_HPP
+#endif
