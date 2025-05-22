@@ -69,11 +69,7 @@ int	main()
 	Base *test = generate();
 
 	identify(NULL); //should output "NULL pointer"
-
 	identify(test); //should output the A, B or C
-
-	if (test != NULL) //good practice, but never happens to be NULL
-		identify(*test); //should output the same type as the test before
 
 	delete test;
 	return 0;

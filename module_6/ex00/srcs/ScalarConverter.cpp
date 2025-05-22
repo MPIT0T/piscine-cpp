@@ -70,7 +70,7 @@ int ScalarConverter::toFloat(const std::string& literal)
 	std::stringstream ss(literal);
 	float f;
 	ss >> f;
-	if (!ss.eof() || ss.fail())
+	if (ss.eof() || ss.fail() || literal[literal.length() - 1] != 'f')
 		return 1;
 	std::cout << "---[float]---" << std::endl;
 	put_types(static_cast<char>(f), static_cast<int>(f), f, static_cast<double>(f));
