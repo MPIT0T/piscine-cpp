@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/16 18:10:04 by mpitot            #+#    #+#              #
-#    Updated: 2024/10/15 13:22:04 by mpitot           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 SRCS	=	main.cpp		\
 
 HEADERS	=	templates.hpp
@@ -28,7 +16,7 @@ NAME	=	ex00
 
 CC		=	c++
 
-FLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3
+FLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 RED		=	\033[1;31m
 GREEN	=	\033[1;32m

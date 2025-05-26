@@ -41,59 +41,92 @@ void	printArray(Array<char>& array)
 
 int main()
 {
-	{
-		Array<int> a(5);
+	std::cout << "===== Integer Array Test =====" << std::endl;
+	Array<int> intArray(5);
+	for (int i = 0; i < 5; i++)
+		intArray[i] = i;
+	std::cout << "Original intArray (size: " << intArray.size() << "): ";
+	printArray(intArray);
 
-		for (int i = 0; i < 5; i++)
-			a[i] = i;
-		std::cout << a.size() << std::endl;
-		printArray(a);
-		Array<int> b;
-		std::cout << b.size() << std::endl;
-		printArray(b);
-		b = a;
-		a[0] = 100;
-		printArray(b);
-		printArray(a);
-		try
-		{
-			std::cout << a[0] << std::endl;
-			std::cout << a[5] << std::endl;
-		}
-		catch (std::out_of_range &e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
+	Array<int> intCopy;
+	std::cout << "Empty intCopy (size: " << intCopy.size() << "): ";
+	printArray(intCopy);
+
+	intCopy = intArray;
+	intArray[0] = 100;
+
+	std::cout << "After assignment and modification:" << std::endl;
+	std::cout << "intCopy: ";
+	printArray(intCopy);
+	std::cout << "intArray: ";
+	printArray(intArray);
+
+	try
+	{
+		std::cout << "Access intArray[0]: " << intArray[0] << std::endl;
+		std::cout << "Access intArray[5] (out of bounds): ";
+		std::cout << intArray[5] << std::endl; // Should throw
+	}
+	catch (const std::out_of_range &e)
+	{
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 
-	{
-		Array<char> a(26);
 
-		int i = 0;
-		for (char c = 'a'; c <= 'z'; c++)
-		{
-			a[i] = c;
-			i++;
-		}
-		std::cout << a.size() << std::endl;
-		printArray(a);
-		Array<char> b;
-		std::cout << b.size() << std::endl;
-		printArray(b);
-		b = a;
-		a[0] = 'Z';
-		printArray(b);
-		printArray(a);
-		try
-		{
-			std::cout << a[0] << std::endl;
-			std::cout << a[27] << std::endl;
-		}
-		catch (std::out_of_range &e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
+	std::cout << "\n===== Char Array Test =====" << std::endl;
+	Array<char> charArray(26);
+	for (int i = 0; i < 26; i++)
+		charArray[i] = 'a' + i;
+	std::cout << "Original charArray (size: " << charArray.size() << "): ";
+	printArray(charArray);
+
+	Array<char> charCopy;
+	std::cout << "Empty charCopy (size: " << charCopy.size() << "): ";
+	printArray(charCopy);
+
+	charCopy = charArray;
+	charArray[0] = 'Z';
+
+	std::cout << "After assignment and modification:" << std::endl;
+	std::cout << "charCopy: ";
+	printArray(charCopy);
+	std::cout << "charArray: ";
+	printArray(charArray);
+
+	try
+	{
+		std::cout << "Access charArray[0]: " << charArray[0] << std::endl;
+		std::cout << "Access charArray[27] (out of bounds): ";
+		std::cout << charArray[27] << std::endl; // Should throw
+	}
+	catch (const std::out_of_range &e)
+	{
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 
-	return (0);
+
+	std::cout << "\n===== Const Array Test =====" << std::endl;
+	Array<int> constSource(3);
+	for (int i = 0; i < 3; ++i)
+		constSource[i] = i * 10;
+
+	const Array<int> constArray = constSource;
+
+	std::cout << "constArray contents: ";
+	for (unsigned int i = 0; i < constArray.size(); ++i)
+		std::cout << constArray[i] << " ";
+	std::cout << std::endl;
+
+	try
+	{
+		std::cout << "Access constArray[3] (out of bounds): ";
+		std::cout << constArray[3] << std::endl; // Should throw
+	}
+	catch (const std::out_of_range &e)
+	{
+		std::cout << "Exception caught: " << e.what() << std::endl;
+	}
+
+	return 0;
 }
+

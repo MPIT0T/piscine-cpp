@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 18:44:04 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/13 22:43:37 by mpitot           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "iter.hpp"
 #include <iostream>
 
@@ -27,14 +15,19 @@ void	printArray(const T* array, size_t length)
 	std::cout << "]" << std::endl;
 }
 
-void	modulo2(int& n)
+void	modulo2(int &n)
 {
 	n = n % 2;
 }
 
-void	upperChar(char& c)
+void	upperChar(char &c)
 {
 	c = toupper(c);
+}
+
+void printElement(const std::string &elem)
+{
+	std::cout << elem << " ";
 }
 
 int main(void)
@@ -48,6 +41,7 @@ int main(void)
 		std::cout << "Array after modulo 2" << std::endl;
 		printArray(test, 3);
 	}
+	std::cout << std::endl;
 	{
 		char test[5] = {'H', 'e', 'l', 'l', 'o'};
 
@@ -57,6 +51,14 @@ int main(void)
 		std::cout << "Array after upperChar" << std::endl;
 		printArray(test, 5);
 
+	}
+	std::cout << std::endl;
+	{
+		const std::string test[3] = {"Hello", "from", "const"};
+
+		std::cout << "Printing const array using iter:" << std::endl;
+		iter<std::string>(test, 3, &printElement);
+		std::cout << std::endl;
 	}
 	return (0);
 }
