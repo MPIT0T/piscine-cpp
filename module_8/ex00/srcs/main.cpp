@@ -1,53 +1,39 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 18:44:04 by mpitot            #+#    #+#             */
-/*   Updated: 2024/10/13 22:43:37 by mpitot           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "easyfind.hpp"
 #include <iostream>
 #include <vector>
 #include <list>
-#include <stack>
 
 int main()
 {
-	std::vector<int> vector;
-	vector.push_back(0);
-	vector.push_back(1);
-	vector.push_back(2);
-	vector.push_back(3);
-	vector.push_back(4);
-	vector.push_back(5);
+	try
+	{
+		std::vector<int> vec;
+		std::list<int> lst;
 
-	std::cout << easyfind(vector, 3) << std::endl;
-	std::cout << easyfind(vector, 6) << std::endl;
+		{
+			vec.push_back(1);
+			vec.push_back(2);
+			vec.push_back(3);
+			vec.push_back(42);
+			vec.push_back(5);
 
-	std::stack<int> stack;
-	stack.push(0);
-	stack.push(1);
-	stack.push(2);
-	stack.push(3);
-	stack.push(4);
-	stack.push(5);
+			lst.push_back(10);
+			lst.push_back(20);
+			lst.push_back(30);
+			lst.push_back(40);
+		} // filling the containers
 
-	std::cout << easyfind(stack, 3) << std::endl;
-	std::cout << easyfind(stack, 6) << std::endl;
+		std::cout << "Found in vector: " << *easyfind(vec, 42) << std::endl;
+		std::cout << "Found in list: " << *easyfind(lst, 30) << std::endl;
 
-	std::list<int> list;
-	list.push_back(0);
-	list.push_back(1);
-	list.push_back(2);
-	list.push_back(3);
-	list.push_back(4);
-	list.push_back(5);
+		// This will throw
+		std::cout << "Trying to find 99 in vector..." << std::endl;
+		std::cout << *easyfind(vec, 99) << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+	}
 
-	std::cout << easyfind(list, 3) << std::endl;
-	std::cout << easyfind(list, 6) << std::endl;
+	return 0;
 }

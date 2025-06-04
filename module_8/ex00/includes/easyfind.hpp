@@ -1,16 +1,17 @@
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
 
-# include <climits>
-# include <iostream>
+#include <stdexcept>
 
 template <typename T>
-int easyfind(const T &container, int elem)
+typename T::const_iterator easyfind(const T &container, int elem)
 {
-	typename T::const_iterator it = std::find(container.begin(), container.end(), elem);
-	if (it == container.end())
-		throw std::runtime_error("Not found");
-	return *it;
+	for (typename T::const_iterator it = container.begin(); it != container.end(); ++it)
+	{
+		if (*it == elem)
+			return it;
+	}
+	throw std::runtime_error("Not found");
 }
 
-#endif //EASYFIND_HPP
+#endif

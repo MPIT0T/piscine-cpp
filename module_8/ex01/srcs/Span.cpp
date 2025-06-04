@@ -1,8 +1,7 @@
 #include "Span.hpp"
-
+#include <climits>
 #include <stdexcept>
 
-/* Constructors ************************************************************* */
 Span::Span() {}
 
 Span::Span(const int &maxSize) : _maxSize(maxSize) {}
@@ -14,13 +13,16 @@ Span::Span(const Span &src)
 
 Span::~Span() {}
 
-/* Operators **************************************************************** */
 Span &Span::operator=(const Span &src)
 {
-	return (*this);
+	if (this != &src)
+	{
+		_vector = src._vector;
+		_maxSize = src._maxSize;
+	}
+	return *this;
 }
 
-/* Methods ****************************************************************** */
 void Span::addNumber(const int &number)
 {
 	if (_vector.size() >= _maxSize)
@@ -32,7 +34,15 @@ unsigned int Span::shortestSpan()
 {
 	if (_vector.size() <= 1)
 		throw std::runtime_error("Not enough numbers stored");
-	
+
+	unsigned int minSpan = UINT_MAX;
+	for (size_t i = 1; i < _vector.size(); ++i)
+	{
+		const unsigned int diff = ABS(_vector[i] - _vector[i - 1]);
+		if (diff < minSpan)
+			minSpan = diff;
+	}
+	return minSpan;
 }
 
 unsigned int Span::longestSpan()
@@ -48,5 +58,5 @@ unsigned int Span::longestSpan()
 		if (*it < min)
 			min = *it;
 	}
-	return (max - min);
+	return max - min;
 }

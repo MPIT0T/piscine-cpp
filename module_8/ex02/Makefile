@@ -1,6 +1,6 @@
-SRCS	=	main.cpp		\
+SRCS	=	main.cpp
 
-HEADERS	=	easyfind.hpp	\
+HEADERS	=	MutantStack.hpp
 
 OBJS	=	$(SRCS:%.cpp=${OBJ_D}%.o)
 
@@ -12,11 +12,11 @@ HEAD_D	=	includes/
 
 HEAD	=	$(addprefix $(HEAD_D), $(HEADERS))
 
-NAME	=	ex00
+NAME	=	ex01
 
 CC		=	c++
 
-FLAGS	=	-Wall -Wextra -Werror -std=c++98
+FLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3
 
 RED		=	\033[1;31m
 GREEN	=	\033[1;32m
