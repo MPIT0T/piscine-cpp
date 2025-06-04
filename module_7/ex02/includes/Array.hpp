@@ -10,6 +10,7 @@ public:
 	Array(): _data(NULL), _size(0) {};
 	Array(unsigned int n): _data(new T[n]), _size(n) {};
 	Array(const Array &src) : _data(NULL), _size(0) {*this = src;};
+	~Array() {delete[] _data;};
 
 	Array &operator=(const Array &src)
 	{
@@ -28,11 +29,18 @@ public:
 	T &operator[](unsigned int i)
 	{
 		if (i >= _size)
-			throw (std::out_of_range("Index out of range"));
-		return (_data[i]);
+			throw std::out_of_range("Index out of range");
+		return _data[i];
 	}
 
-	unsigned int size() const {return (_size);};
+	const T &operator[](unsigned int i) const
+	{
+		if (i >= _size)
+			throw std::out_of_range("Index out of range");
+		return _data[i];
+	}
+
+	unsigned int size() const {return _size;};
 
 private:
 	T				*_data;
