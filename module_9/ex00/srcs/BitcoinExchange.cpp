@@ -139,13 +139,13 @@ void BitcoinExchange::printExchanges(const std::string &inputFileName) const
     }
 }
 
-std::ostream & operator<<(std::ostream &os, const BitcoinExchange &exchange)
+std::ostream & operator<<(std::ostream &OUT, const BitcoinExchange &exchange)
 {
     for (map_t::const_iterator it = exchange.getTable().begin(); it != exchange.getTable().end(); ++it)
     {
         if (it != exchange.getTable().begin())
-            os << std::endl;
-        os << it->first << "," << it->second;
+            OUT << std::endl;
+        OUT << it->first << "," << it->second;
     }
-    return os;
+    return OUT;
 }

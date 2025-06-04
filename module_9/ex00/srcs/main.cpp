@@ -5,7 +5,7 @@ int main(int ac, char **av)
 {
     if (ac != 2)
     {
-        std::cerr << "Usage : ./btc [input.txt]" << std::endl;
+        std::cout << "Usage : ./btc [input.txt]" << std::endl;
         return 1;
     }
     try
@@ -16,7 +16,7 @@ int main(int ac, char **av)
     }
     catch (std::exception &e)
     {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cout << "Error: " << e.what() << std::endl;
         return 1;
     }
     return 0;

@@ -28,6 +28,6 @@ private:
     map_t _table;
 };
 
-std::ostream &operator<<(std::ostream &os, const BitcoinExchange &exchange);
+std::ostream &operator<<(std::ostream &OUT, const BitcoinExchange &exchange);
 
 #endif
