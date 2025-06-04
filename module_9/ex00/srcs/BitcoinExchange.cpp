@@ -93,6 +93,7 @@ float BitcoinExchange::checkDateValue(const std::string &date, const std::string
     return fValue;
 }
 
+#include <iomanip>
 void BitcoinExchange::printLine(const std::string &line, const std::string &sep) const
 {
     std::string::size_type pipePos = line.find(sep);
@@ -102,6 +103,7 @@ void BitcoinExchange::printLine(const std::string &line, const std::string &sep)
     const std::string date = line.substr(0, pipePos);
     const std::string value = line.substr(pipePos + sep.size());
 
+    std::cout << std::fixed << std::setprecision(2);
     std::cout << date << " => " << value << " = " << checkDateValue(date, value) * getExchangeRate(date) << std::endl;
 }
 
