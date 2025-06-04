@@ -12,7 +12,7 @@ HEAD_D	=	includes/
 
 HEAD	=	$(addprefix $(HEAD_D), $(HEADERS))
 
-NAME	=	ex01
+NAME	=	MutantStack
 
 CC		=	c++
 
