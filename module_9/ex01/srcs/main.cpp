@@ -17,7 +17,7 @@ int main(int ac, char **av)
 {
     if (ac != 2)
     {
-        std::cout << "Usage: ./RPN \"operations\"";
+        std::cout << "Usage: ./RPN \"operations\"" << std::endl;
         return 1;
     }
 
@@ -33,6 +33,7 @@ int main(int ac, char **av)
     catch (std::exception &e)
     {
         std::cout << "Error: " << e.what() << std::endl;
+        return 1;
     }
 
 

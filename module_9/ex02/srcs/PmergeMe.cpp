@@ -72,36 +72,80 @@ const std::vector<int> &PmergeMe::getVector() const
     return _vector;
 }
 
-static std::vector<size_t> generateJacobsthalVector(const size_t limit)
+static std::vector<size_t> generateJacobsthalVector(const size_t size)
 {
+    std::vector<size_t> jacob;
+
+    // Brute Jacobsuite
     std::vector<size_t> seq;
     size_t a = 0;
     size_t b = 1;
 
-    while (b < limit)
+    while (b < size)
     {
         seq.push_back(b);
         size_t temp = b;
         b = b + 2 * a;
         a = temp;
     }
-    return seq;
+
+    // Invert it
+    std::vector<bool> used(size, false);
+    for (int i = seq.size() - 1; i >= 0; --i)
+    {
+        if (!used[seq[i]])
+        {
+            jacob.push_back(seq[i]);
+            used[seq[i]] = true;
+        }
+    }
+
+    // Ajouter les indices non couverts
+    for (size_t i = 0; i < size; ++i)
+    {
+        if (!used[i])
+            jacob.push_back(i);
+    }
+
+    return jacob;
 }
 
-static std::deque<size_t> generateJacobsthalDeque(const size_t limit)
+static std::deque<size_t> generateJacobsthalDeque(const size_t size)
 {
+    std::deque<size_t> jacob;
+
+    // Génération brute des indices Jacobsthal
     std::deque<size_t> seq;
     size_t a = 0;
     size_t b = 1;
 
-    while (b < limit)
+    while (b < size)
     {
         seq.push_back(b);
         size_t temp = b;
         b = b + 2 * a;
         a = temp;
     }
-    return seq;
+
+    // Ordre inverse pour Ford-Johnson
+    std::vector<bool> used(size, false);
+    for (int i = seq.size() - 1; i >= 0; --i)
+    {
+        if (!used[seq[i]])
+        {
+            jacob.push_back(seq[i]);
+            used[seq[i]] = true;
+        }
+    }
+
+    // Ajouter les indices non couverts
+    for (size_t i = 0; i < size; ++i)
+    {
+        if (!used[i])
+            jacob.push_back(i);
+    }
+
+    return jacob;
 }
 
 static void fordJohnsonSort(std::vector<int> &input)
@@ -115,8 +159,8 @@ static void fordJohnsonSort(std::vector<int> &input)
     std::vector<int>::iterator it = input.begin();
     while (it != input.end() && it + 1 != input.end())
     {
-        main_chain.push_back(std::max(*it, *it + 1));
-        pending.push_back(std::min(*it, *it + 1));
+        main_chain.push_back(std::max(*it, *(it + 1)));
+        pending.push_back(std::min(*it, *(it + 1)));
 
         it += 2;
     }
@@ -129,9 +173,13 @@ static void fordJohnsonSort(std::vector<int> &input)
     const std::vector<size_t> jacob = generateJacobsthalVector(pending.size());
     std::vector<bool> used(pending.size(), false);
 
+    // std::cout << "Jacobsthal indices: ";
+    // for (size_t i = 0; i < jacob.size(); ++i)
+    //     std::cout << jacob[i] << " ";
+    // std::cout << std::endl;
     for (size_t i = 0; i < jacob.size(); ++i)
     {
-        if (i >= pending.size())
+        if (jacob[i] >= pending.size())
             break ;
         int value = pending[jacob[i]];
         used[jacob[i]] = true;
@@ -139,14 +187,14 @@ static void fordJohnsonSort(std::vector<int> &input)
         main_chain.insert(pos, value);
     }
 
-    for (size_t i = 0; i < pending.size(); ++i)
-    {
-        if (used[i])
-            continue ;
-        int value = pending[i];
-        std::vector<int>::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), value);
-        main_chain.insert(pos, value);
-    }
+    // for (size_t i = 0; i < pending.size(); ++i)
+    // {
+    //     if (used[i])
+    //         continue ;
+    //     int value = pending[i];
+    //     std::vector<int>::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), value);
+    //     main_chain.insert(pos, value);
+    // }
 
     input.assign(main_chain.begin(), main_chain.end());
 }
@@ -162,8 +210,8 @@ static void fordJohnsonSort(std::deque<int> &input)
     std::deque<int>::iterator it = input.begin();
     while (it != input.end() && it + 1 != input.end())
     {
-        main_chain.push_back(std::max(*it, *it + 1));
-        pending.push_back(std::min(*it, *it + 1));
+        main_chain.push_back(std::max(*it, *(it + 1)));
+        pending.push_back(std::min(*it, *(it + 1)));
 
         it += 2;
     }
@@ -176,9 +224,13 @@ static void fordJohnsonSort(std::deque<int> &input)
     const std::deque<size_t> jacob = generateJacobsthalDeque(pending.size());
     std::deque<bool> used(pending.size(), false);
 
+    // std::cout << "Jacobsthal indices: ";
+    // for (size_t i = 0; i < jacob.size(); ++i)
+    //     std::cout << jacob[i] << " ";
+    // std::cout << std::endl;
     for (size_t i = 0; i < jacob.size(); ++i)
     {
-        if (i >= pending.size())
+        if (jacob[i] >= pending.size())
             break ;
         int value = pending[jacob[i]];
         used[jacob[i]] = true;
@@ -186,14 +238,14 @@ static void fordJohnsonSort(std::deque<int> &input)
         main_chain.insert(pos, value);
     }
 
-    for (size_t i = 0; i < pending.size(); ++i)
-    {
-        if (used[i])
-            continue ;
-        int value = pending[i];
-        std::deque<int>::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), value);
-        main_chain.insert(pos, value);
-    }
+    // for (size_t i = 0; i < pending.size(); ++i)
+    // {
+    //     if (used[i])
+    //         continue ;
+    //     int value = pending[i];
+    //     std::deque<int>::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), value);
+    //     main_chain.insert(pos, value);
+    // }
 
     input.assign(main_chain.begin(), main_chain.end());
 }
